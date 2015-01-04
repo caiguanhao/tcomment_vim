@@ -1140,6 +1140,12 @@ function! tcomment#OperatorLine(type) "{{{3
 endf
 
 
+function! tcomment#OperatorBlock(type) "{{{3
+    " TLogVAR a:type
+    call tcomment#Operator('block', 'B')
+endf
+
+
 function! tcomment#OperatorAnyway(type) "{{{3
     " TLogVAR a:type
     call tcomment#Operator(a:type, '', '!')

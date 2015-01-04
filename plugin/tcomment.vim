@@ -37,6 +37,11 @@ if !exists("g:tcommentMapLeaderOp1")
     let g:tcommentMapLeaderOp1 = 'gc' "{{{2
 endif
 
+if !exists("g:tcommentMapLeaderOp2")
+    " See |tcomment-operator|.
+    let g:tcommentMapLeaderOp2 = 'gC' "{{{2
+endif
+
 if !exists("g:tcommentMapLeaderUncommentAnyway")
     " See |tcomment-operator|.
     let g:tcommentMapLeaderUncommentAnyway = 'g<' "{{{2
@@ -202,8 +207,10 @@ noremap <Plug>TComment_ic :<c-U>call tcomment#TextObjectInlineComment()<cr>
 call s:MapOp('gcc', '', '', 'tcomment#OperatorLine', 'g@$')
 call s:MapOp('gcb', '', 'call tcomment#SetOption("mode_extra", "B")', 'tcomment#OperatorLine', 'g@')
 xnoremap <Plug>TComment_gc :TCommentMaybeInline<cr>
+xnoremap <Plug>TComment_gC :TCommentBlock<cr>
 
 call s:MapOp('gc', '', '', 'tcomment#Operator', 'g@')
+call s:MapOp('gC', '', '', 'tcomment#OperatorBlock', 'g@')
 
 for s:i in range(1, 9)
     exec 'noremap <Plug>TComment_<c-_>' . s:i . ' :call tcomment#SetOption("count", '. s:i .')<cr>'
@@ -271,6 +278,10 @@ if g:tcommentMaps
         exec 'nmap <silent> '. g:tcommentMapLeaderOp1 .'c <Plug>TComment_gcc'
         exec 'nmap <silent> '. g:tcommentMapLeaderOp1 .'b <Plug>TComment_gcb'
         exec 'xmap '. g:tcommentMapLeaderOp1 .' <Plug>TComment_gc'
+    endif
+    if g:tcommentMapLeaderOp2 != ''
+        exec 'nmap <silent> '. g:tcommentMapLeaderOp2 .' <Plug>TComment_gC'
+        exec 'xmap '. g:tcommentMapLeaderOp2 .' <Plug>TComment_gC'
     endif
    if g:tcommentMapLeaderUncommentAnyway != ''
         exec 'nmap <silent> '. g:tcommentMapLeaderUncommentAnyway .' <Plug>TComment_Uncomment'
